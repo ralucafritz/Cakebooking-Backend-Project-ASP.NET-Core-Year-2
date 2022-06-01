@@ -1,0 +1,15 @@
+E:\repos\ASP.NET-Project\cake-booking.DAL\bin\Debug\net5.0\cake-booking.DAL.deps.json
+E:\repos\ASP.NET-Project\cake-booking.DAL\bin\Debug\net5.0\cake-booking.DAL.runtimeconfig.json
+E:\repos\ASP.NET-Project\cake-booking.DAL\bin\Debug\net5.0\cake-booking.DAL.runtimeconfig.dev.json
+E:\repos\ASP.NET-Project\cake-booking.DAL\bin\Debug\net5.0\cake-booking.DAL.dll
+E:\repos\ASP.NET-Project\cake-booking.DAL\bin\Debug\net5.0\ref\cake-booking.DAL.dll
+E:\repos\ASP.NET-Project\cake-booking.DAL\bin\Debug\net5.0\cake-booking.DAL.pdb
+E:\repos\ASP.NET-Project\cake-booking.DAL\obj\Debug\net5.0\cake-booking.DAL.csproj.AssemblyReference.cache
+E:\repos\ASP.NET-Project\cake-booking.DAL\obj\Debug\net5.0\cake-booking.DAL.GeneratedMSBuildEditorConfig.editorconfig
+E:\repos\ASP.NET-Project\cake-booking.DAL\obj\Debug\net5.0\cake-booking.DAL.AssemblyInfoInputs.cache
+E:\repos\ASP.NET-Project\cake-booking.DAL\obj\Debug\net5.0\cake-booking.DAL.AssemblyInfo.cs
+E:\repos\ASP.NET-Project\cake-booking.DAL\obj\Debug\net5.0\cake-booking.DAL.csproj.CoreCompileInputs.cache
+E:\repos\ASP.NET-Project\cake-booking.DAL\obj\Debug\net5.0\cake-booking.DAL.dll
+E:\repos\ASP.NET-Project\cake-booking.DAL\obj\Debug\net5.0\ref\cake-booking.DAL.dll
+E:\repos\ASP.NET-Project\cake-booking.DAL\obj\Debug\net5.0\cake-booking.DAL.pdb
+E:\repos\ASP.NET-Project\cake-booking.DAL\obj\Debug\net5.0\cake-booking.DAL.genruntimeconfig.cache
