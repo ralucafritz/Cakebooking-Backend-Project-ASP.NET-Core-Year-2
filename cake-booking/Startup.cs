@@ -1,4 +1,6 @@
 using cake_booking.DAL;
+using cake_booking.DAL.Interfaces;
+using cake_booking.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,6 +40,16 @@ namespace cake_booking
                                                 .ReferenceLoopHandling.Ignore);
 
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnString")));
+
+            // REPOSITORIES
+            services.AddTransient<IClientRepository, ClientRepository>();
+            services.AddTransient<IClientAddressRepository, ClientAddressRepository>();
+            services.AddTransient<IVendorRepository, VendorRepository>();
+            services.AddTransient<IPickUpOrderRepository, PickUpOrderRepository>();
+            services.AddTransient<ICakeRepository, CakeRepository>();
+            services.AddTransient<IScheduleRepository, ScheduleRepository>();
+
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

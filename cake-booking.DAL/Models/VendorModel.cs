@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cake_booking.DAL.Models
 {
-    class VendorModel
+    public class VendorModel
     {
         public string Name { get; set; }
     }
