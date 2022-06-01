@@ -14,5 +14,6 @@ namespace cake_booking.DAL.Entities
         public string PhoneNumber { get; set; }
         public char Gender { get; set; }
         public virtual ClientAddress ClientAddress { get; set; }
+        public virtual ICollection<PickUpOrder> PickUpOrders { get; set; }
     }
 }

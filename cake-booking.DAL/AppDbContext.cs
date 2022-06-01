@@ -20,6 +20,8 @@ namespace cake_booking.DAL
         public DbSet<ClientAddress> ClientAddresses { get; set; }
         public DbSet<Vendor> Vendors{ get; set; }
         public DbSet<Cake> Cakes { get; set; }
+        public DbSet<Schedule> Schedules{ get; set; }
+        public DbSet<PickUpOrder> PickUpOrders { get; set; }
 
         // overriding OnConfiguring from DbContext class
         // using UseLoggerFactory -> show SQL Query Logs in console
@@ -36,6 +38,8 @@ namespace cake_booking.DAL
             modelBuilder.ApplyConfiguration(new ClientAddressConfiguration());
             modelBuilder.ApplyConfiguration(new VendorConfiguration());
             modelBuilder.ApplyConfiguration(new CakeConfiguration());
+            modelBuilder.ApplyConfiguration(new ScheduleConfiguration());
+            modelBuilder.ApplyConfiguration(new PickUpOrderConfiguration());
         }
 
 

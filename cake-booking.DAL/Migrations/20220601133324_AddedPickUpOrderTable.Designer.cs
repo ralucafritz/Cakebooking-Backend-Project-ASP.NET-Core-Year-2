@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cake_booking.DAL;
 
 namespace cake_booking.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220601133324_AddedPickUpOrderTable")]
+    partial class AddedPickUpOrderTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,19 +179,19 @@ namespace cake_booking.DAL.Migrations
             modelBuilder.Entity("cake_booking.DAL.Entities.PickUpOrder", b =>
                 {
                     b.HasOne("cake_booking.DAL.Entities.Cake", "Cake")
-                        .WithMany("PickUpOrders")
+                        .WithMany()
                         .HasForeignKey("CakeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("cake_booking.DAL.Entities.Client", "Client")
-                        .WithMany("PickUpOrders")
+                        .WithMany()
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("cake_booking.DAL.Entities.Vendor", "Vendor")
-                        .WithMany("PickUpOrders")
+                        .WithMany()
                         .HasForeignKey("VendorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -212,22 +214,13 @@ namespace cake_booking.DAL.Migrations
                     b.Navigation("Vendor");
                 });
 
-            modelBuilder.Entity("cake_booking.DAL.Entities.Cake", b =>
-                {
-                    b.Navigation("PickUpOrders");
-                });
-
             modelBuilder.Entity("cake_booking.DAL.Entities.Client", b =>
                 {
                     b.Navigation("ClientAddress");
-
-                    b.Navigation("PickUpOrders");
                 });
 
             modelBuilder.Entity("cake_booking.DAL.Entities.Vendor", b =>
                 {
-                    b.Navigation("PickUpOrders");
-
                     b.Navigation("Schedules");
                 });
 #pragma warning restore 612, 618
