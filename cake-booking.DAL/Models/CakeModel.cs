@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cake_booking.DAL.Entities
+namespace cake_booking.DAL.Models
 {
-    public class Vendor
+    public class CakeModel
     {
-        public int Id { get; set; }
         public string Name { get; set; }
-
+        public string Description { get; set; }
+        public decimal Price { get; set; }
     }
 }
