@@ -1,5 +1,7 @@
-﻿using cake_booking.DAL.Interfaces;
+﻿using cake_booking.DAL.Entities;
+using cake_booking.DAL.Interfaces;
 using cake_booking.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,52 +10,115 @@ using System.Threading.Tasks;
 
 namespace cake_booking.DAL.Repositories
 {
-    public class ClientManager : IClientRepository
+    public class ClientRepository : IClientRepository
     {
         private readonly AppDbContext _context;
 
-        public ClientManager(AppDbContext context)
+        public ClientRepository(AppDbContext context)
         {
             _context = context;
         }
+
         // C
-        public Task Create(ClientModel client)
+        public async Task Create(ClientModel clientModel)
         {
-            throw new NotImplementedException();
+            var client = new Client {
+                FirstName = clientModel.FirstName,
+                LastName = clientModel.LastName,
+                PhoneNumber = clientModel.PhoneNumber,
+                Gender = clientModel.Gender
+            };
+
+            await _context.Clients.AddAsync(client);
+            await _context.SaveChangesAsync();
         }
         // R
-        public Task<List<ClientModel>> GetAll()
+        public async Task<List<ClientModel>> GetAll()
         {
-            throw new NotImplementedException();
+            var clients = await (await GetAllQuery()).ToListAsync();
+            var list = new List<ClientModel>();
+            foreach (var client in clients)
+            {
+                ClientModel clientModel = new ClientModel
+                {
+                    FirstName = client.FirstName,
+                    LastName = client.LastName,
+                    PhoneNumber = client.PhoneNumber,
+                    Gender = client.Gender
+                };
+                list.Add(clientModel);
+            }
+
+            return list;
         }
-        public Task<ClientModel> GetById(int id)
+        public async Task<ClientModel> GetById(int id)
         {
-            throw new NotImplementedException();
+            Client client = await _context.Clients.FindAsync(id);
+            ClientModel clientModel = new ClientModel
+            {
+                FirstName = client.FirstName,
+                LastName = client.LastName,
+                PhoneNumber = client.PhoneNumber,
+                Gender = client.Gender
+            };
+            return clientModel;
         }
+
+        public async Task<List<ClientJoinClientAddressModel>> GetAddress()
+        {
+            var result = await (await GetAllQuery())
+                .Include(x => x.ClientAddress)
+                .Where(x => x.ClientAddress != null)
+                .ToListAsync();
+
+            var list = new List<ClientJoinClientAddressModel>();
+
+            foreach(var res in result)
+            {
+                ClientJoinClientAddressModel clientJoinClientAddressModel = new ClientJoinClientAddressModel
+                {
+                    FirstName = res.FirstName,
+                    LastName = res.LastName,
+                    PhoneNumber = res.PhoneNumber,
+                    Gender = res.Gender,
+                    City = res.ClientAddress.City,
+                    Country = res.ClientAddress.Country
+                };
+                list.Add(clientJoinClientAddressModel); 
+            }
+
+            return list;
+        }
+
+        public async Task<IQueryable<Client>> GetAllQuery()
+        {
+            var query = _context.Clients.AsQueryable();
+            return query;
+        }
+
         // U
-        public Task Update(int id, ClientModel client)
+        public async Task Update(int id, ClientModel clientModel)
         {
-            throw new NotImplementedException();
+            Client client = await _context.Clients.FindAsync(id);
+
+            client.FirstName = clientModel.FirstName;
+            client.LastName = clientModel.LastName;
+            client.PhoneNumber = clientModel.PhoneNumber;
+            client.Gender = clientModel.Gender;
+
+            _context.Clients.Update(client);
+
+            await _context.SaveChangesAsync();
         }
         // D
-        public Task Delete(int id, ClientModel client)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            Client client = await _context.Clients.FindAsync(id);
+
+            _context.Clients.Remove(client);
+
+            await _context.SaveChangesAsync();
         }
 
-        public Task<List<ClientJoinClientAddressModel>> GetAddress()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<ClientModel>> GetNameAndNumber()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IQueryable<ClientModel>> GetAllQuery()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -22,6 +22,7 @@ namespace cake_booking.DAL
         public DbSet<Cake> Cakes { get; set; }
         public DbSet<Schedule> Schedules{ get; set; }
         public DbSet<PickUpOrder> PickUpOrders { get; set; }
+        public object ClientModel { get; internal set; }
 
         // overriding OnConfiguring from DbContext class
         // using UseLoggerFactory -> show SQL Query Logs in console
