@@ -18,7 +18,7 @@ namespace cake_booking.DAL.Repositories
         {
             _context = context;
         }
-
+        // C R U D
         public async Task Create(PickUpOrderModel pickUpOrderModel)
         {
             var pickUpOrder = new PickUpOrder

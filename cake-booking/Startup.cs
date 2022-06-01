@@ -49,10 +49,9 @@ namespace cake_booking
             services.AddTransient<IVendorRepository, VendorRepository>();
             services.AddTransient<IPickUpOrderRepository, PickUpOrderRepository>();
             services.AddTransient<ICakeRepository, CakeRepository>();
-            services.AddTransient<IScheduleRepository, ScheduleRepository>();
 
 
-            // MANAGERS
+             // MANAGERS
             services.AddTransient<IClientManager, ClientManager>();
             //services.AddTransient<IClientAddressManager, ClientAddressManager>();
             //services.AddTransient<IVendorManager, VendorManager>();
