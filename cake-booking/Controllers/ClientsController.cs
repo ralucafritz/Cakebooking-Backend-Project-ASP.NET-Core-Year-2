@@ -35,6 +35,10 @@ namespace cake_booking.Controllers
             {
                 return BadRequest("Last name is null.");
             }
+            else if(checkInvalidNumber(client.PhoneNumber)!=null)
+            {
+                return BadRequest(checkInvalidNumber(client.PhoneNumber));
+            }
 
             await _context.Clients.AddAsync(client);
             await _context.SaveChangesAsync();
@@ -42,7 +46,22 @@ namespace cake_booking.Controllers
             return Ok("Client added successfully");
         }
 
-//////////////////////////////////////////////// GET ////////////////////////////////////////////////////////
+        // check valid phonenumber
+        private string checkInvalidNumber(string phoneNumber)
+        {
+            string checkError = null;
+            if (phoneNumber.Length != 10)
+            
+                checkError = "The phone number must have 10 digits.";
+     
+            if (!phoneNumber.StartsWith("07"))
+         
+                checkError = "The phone number is invalid. The phone number should start with the digits `07`.";
+
+            return checkError;
+        }
+
+        //////////////////////////////////////////////// GET ////////////////////////////////////////////////////////
 
         [HttpGet("Get/{id}")]
         public async Task<IActionResult> GetClient([FromRoute] int id)

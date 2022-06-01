@@ -18,11 +18,10 @@ namespace cake_booking.DAL
 
         public DbSet<Client> Clients { get; set; }
         public DbSet<ClientAddress> ClientAddresses { get; set; }
-        public DbSet<ClientInformation> ClientInformations { get; set; }
-        //public DbSet<Vendor> Vendors{ get; set; }
-        //public DbSet<ClientVendor> ClientVendors{ get; set; }
+        public DbSet<Vendor> Vendors{ get; set; }
 
-
+        // overriding OnConfiguring from DbContext class
+        // using UseLoggerFactory -> show SQL Query Logs in console
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(LoggerFactory.Create(options => options.AddConsole()));
@@ -33,15 +32,8 @@ namespace cake_booking.DAL
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new ClientConfiguration());
-
             modelBuilder.ApplyConfiguration(new ClientAddressConfiguration());
-
-            modelBuilder.ApplyConfiguration(new ClientInformationConfiguration());
-
-            //modelBuilder.ApplyConfiguration(new VendorConfiguration());
-
-            //modelBuilder.ApplyConfiguration(new ClientVendorConfiguration());
-
+            modelBuilder.ApplyConfiguration(new VendorConfiguration());
         }
 
 

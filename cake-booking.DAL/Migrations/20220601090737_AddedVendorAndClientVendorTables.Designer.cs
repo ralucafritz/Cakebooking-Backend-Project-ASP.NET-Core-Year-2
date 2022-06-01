@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cake_booking.DAL;
 
 namespace cake_booking.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220601090737_AddedVendorAndClientVendorTables")]
+    partial class AddedVendorAndClientVendorTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,18 +32,9 @@ namespace cake_booking.DAL.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
-
                     b.Property<string>("LastName")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
 
@@ -75,6 +68,56 @@ namespace cake_booking.DAL.Migrations
                     b.ToTable("ClientAddresses");
                 });
 
+            modelBuilder.Entity("cake_booking.DAL.Entities.ClientInformation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId")
+                        .IsUnique()
+                        .HasFilter("[ClientId] IS NOT NULL");
+
+                    b.ToTable("ClientInformations");
+                });
+
+            modelBuilder.Entity("cake_booking.DAL.Entities.ClientVendor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VendorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("VendorId");
+
+                    b.ToTable("ClientVendors");
+                });
+
             modelBuilder.Entity("cake_booking.DAL.Entities.Vendor", b =>
                 {
                     b.Property<int>("Id")
@@ -100,9 +143,46 @@ namespace cake_booking.DAL.Migrations
                     b.Navigation("Client");
                 });
 
+            modelBuilder.Entity("cake_booking.DAL.Entities.ClientInformation", b =>
+                {
+                    b.HasOne("cake_booking.DAL.Entities.Client", "Client")
+                        .WithOne("ClientInformation")
+                        .HasForeignKey("cake_booking.DAL.Entities.ClientInformation", "ClientId");
+
+                    b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("cake_booking.DAL.Entities.ClientVendor", b =>
+                {
+                    b.HasOne("cake_booking.DAL.Entities.Client", "Client")
+                        .WithMany("ClientVendors")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("cake_booking.DAL.Entities.Vendor", "Vendor")
+                        .WithMany("ClientVendors")
+                        .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Vendor");
+                });
+
             modelBuilder.Entity("cake_booking.DAL.Entities.Client", b =>
                 {
                     b.Navigation("ClientAddress");
+
+                    b.Navigation("ClientInformation");
+
+                    b.Navigation("ClientVendors");
+                });
+
+            modelBuilder.Entity("cake_booking.DAL.Entities.Vendor", b =>
+                {
+                    b.Navigation("ClientVendors");
                 });
 #pragma warning restore 612, 618
         }

@@ -29,7 +29,14 @@ namespace cake_booking
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            // to avoid loop references => referenceloophandling
+            services.AddControllers()
+                .AddNewtonsoftJson(options => options
+                                                    .SerializerSettings
+                                                    .ReferenceLoopHandling = 
+                                                Newtonsoft.Json
+                                                .ReferenceLoopHandling.Ignore);
+
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnString")));
 
             services.AddControllers();
