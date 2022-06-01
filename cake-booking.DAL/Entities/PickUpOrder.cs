@@ -14,8 +14,8 @@ namespace cake_booking.DAL.Entities
         // CakeId
         // StartHour of the PickUpOrder
 
-        public DateTime StartHour { get; set; }
-        public DateTime EndHour { get; set; }
+        public DateTime StartDay { get; set; }
+        public DateTime EndDay { get; set; }
         public int VendorId { get; set; }
         public int ClientId { get; set; }
         public int CakeId { get; set; }

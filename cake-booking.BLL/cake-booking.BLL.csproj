@@ -25,9 +25,4 @@
     <ProjectReference Include="..\cake-booking.DAL\cake-booking.DAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Managers\" />
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
 </Project>

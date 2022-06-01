@@ -15,7 +15,7 @@ namespace cake_booking.DAL.Configurations
         {
             builder.HasKey(p => new
             {
-                p.StartHour,
+                p.StartDay,
                 p.ClientId,
                 p.CakeId,
                 p.VendorId

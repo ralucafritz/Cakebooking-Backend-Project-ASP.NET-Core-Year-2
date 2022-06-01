@@ -10,14 +10,16 @@ namespace cake_booking.DAL.Interfaces
 {
     public interface IPickUpOrderRepository
     {
-        Task<PickUpOrderModel> Create(PickUpOrderModel pickUpOrderModel);
+        Task Create(PickUpOrderModel pickUpOrderModel);
         Task<List<PickUpOrderModel>> GetOrdersHistory();
         Task<List<PickUpOrderModel>> GetFutureOrders();
-        Task<PickUpOrderModel> GetOrderInfo(int vendorId, int clientId, int cakeId, DateTime orderTime);
+        Task<List<PickUpOrderModel>> GetAll();
+        Task<IQueryable<PickUpOrder>> GetAllQuery();
+        Task<PickUpOrderModel> GetOrderInfo(int vendorId, int clientId, int cakeId, DateTime startDay);
         Task<List<VendorPickUpOrderModel>> GetVendorOrders(int vendorId);
         Task<List<ClientPickUpOrderModel>> GetClientOrders(int clientId);
-        Task<PickUpOrderModel> Update(PickUpOrderModel pickUpOrderModel);
-        Task<PickUpOrderModel> Delete(PickUpOrderModel pickUpOrderModel);
+        Task Update(int id, PickUpOrderModel pickUpOrderModel);
+        Task Delete(int id);
 
     }
 }

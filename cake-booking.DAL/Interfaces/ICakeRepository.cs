@@ -1,4 +1,5 @@
-﻿using cake_booking.DAL.Models;
+﻿using cake_booking.DAL.Entities;
+using cake_booking.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace cake_booking.DAL.Interfaces
         Task Create(CakeModel cake);
         Task<List<CakeModel>> GetAll();
         Task<CakeModel> GetById(int id);
-        Task<IQueryable<CakeModel>> GetAllQuery();
+        Task<IQueryable<Cake>> GetAllQuery();
         Task Update(int id, CakeModel cake);
-        Task Delete(int id, CakeModel cake);
+        Task Delete(int id);
     }
 }

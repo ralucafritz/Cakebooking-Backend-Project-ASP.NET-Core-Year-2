@@ -1,4 +1,5 @@
-﻿using cake_booking.DAL.Models;
+﻿using cake_booking.DAL.Entities;
+using cake_booking.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,10 @@ namespace cake_booking.DAL.Interfaces
     {
         Task<List<VendorModel>> GetAll();
         Task<VendorModel> GetById(int id);
-        Task<IQueryable<VendorModel>> GetAllQuery();
-        Task Create(VendorModel vendor);
-        Task Delete(int id, VendorModel vendor);
-        Task Update(int id, VendorModel vendor);
+        Task<IQueryable<Vendor>> GetAllQuery();
+        Task Create(VendorModel vendorModel);
+        Task Update(int id, VendorModel vendorModel);
+        Task Delete(int id);
 
     }
 }

@@ -1,5 +1,7 @@
-﻿using cake_booking.DAL.Interfaces;
+﻿using cake_booking.DAL.Entities;
+using cake_booking.DAL.Interfaces;
 using cake_booking.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,24 +19,71 @@ namespace cake_booking.DAL.Repositories
             _context = context;
         }
 
-        public Task<PickUpOrderModel> Create(PickUpOrderModel pickUpOrderModel)
+        public async Task Create(PickUpOrderModel pickUpOrderModel)
         {
-            throw new NotImplementedException();
+            var pickUpOrder = new PickUpOrder
+            {
+                ClientId = pickUpOrderModel.ClientId,
+                VendorId = pickUpOrderModel.VendorId,
+                CakeId = pickUpOrderModel.CakeId,
+                StartDay = pickUpOrderModel.StartDay,
+                EndDay = pickUpOrderModel.EndDay
+            };
+            await _context.PickUpOrders.AddAsync(pickUpOrder);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<PickUpOrderModel> Delete(PickUpOrderModel pickUpOrderModel)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            PickUpOrder pickUpOrder= await _context.PickUpOrders.FindAsync(id);
+
+            _context.PickUpOrders.Remove(pickUpOrder);
+
+            await _context.SaveChangesAsync();
         }
 
-        public Task<List<ClientPickUpOrderModel>> GetClientOrders(int clientId)
+        public async Task<List<ClientPickUpOrderModel>> GetClientOrders(int clientId)
         {
-            throw new NotImplementedException();
+            var clientPickUpOrderModel = await _context.PickUpOrders
+                                                .Include(x => x.Client)
+                                                .Include(x => x.Vendor)
+                                                .Include(x => x.Cake)
+                                                .Where(x => x.ClientId == clientId)
+                                                .Select(x => new ClientPickUpOrderModel
+                                                {
+                                                    VendorName = x.Vendor.Name,
+                                                    CakeName = x.Cake.Name,
+                                                    CakeDescription = x.Cake.Description,
+                                                    Price = x.Cake.Price,
+                                                    StartDay = x.StartDay,
+                                                    EndDay = x.EndDay
+
+                                                })
+                                                .OrderBy(x => x.StartDay)
+                                                .ToListAsync();
+
+            return clientPickUpOrderModel;
         }
 
-        public Task<List<PickUpOrderModel>> GetFutureOrders()
+        public async Task<List<PickUpOrderModel>> GetFutureOrders()
         {
-            throw new NotImplementedException();
+            var pickUpOrderModel = await _context.PickUpOrders
+                .Include(x => x.Client)
+                .Include(x => x.Vendor)
+                .Include(x => x.Cake)
+                .Where(x => x.EndDay > DateTime.Now)
+                .Select(x => new PickUpOrderModel
+                {
+                    StartDay = x.StartDay,
+                    EndDay = x.EndDay,
+                    ClientId = x.Client.Id,
+                    VendorId = x.Vendor.Id,
+                    CakeId = x.CakeId
+                })
+                .OrderBy(x => x.StartDay)
+                .ToListAsync();
+
+            return pickUpOrderModel;
         }
 
         public Task<PickUpOrderModel> GetOrderInfo(int vendorId, int clientId, int cakeId, DateTime orderTime)
@@ -42,19 +91,88 @@ namespace cake_booking.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<PickUpOrderModel>> GetOrdersHistory()
+        public async Task<List<PickUpOrderModel>> GetOrdersHistory()
         {
-            throw new NotImplementedException();
+            var pickUpOrderModel = await _context.PickUpOrders
+                                            .Include(x => x.Client)
+                                            .Include(x => x.Vendor)
+                                            .Include(x => x.Cake)
+                                            .Where(x => x.EndDay < DateTime.Now)
+                                            .Select(x => new PickUpOrderModel
+                                            {
+                                                StartDay = x.StartDay,
+                                                EndDay = x.EndDay,
+                                                ClientId = x.Client.Id,
+                                                VendorId = x.Vendor.Id,
+                                                CakeId = x.CakeId
+                                            })
+                                            .OrderBy(x => x.StartDay)
+                                            .ToListAsync();
+
+            return pickUpOrderModel;
         }
 
-        public Task<List<VendorPickUpOrderModel>> GetVendorOrders(int vendorId)
+        public async Task<List<VendorPickUpOrderModel>> GetVendorOrders(int vendorId)
         {
-            throw new NotImplementedException();
+            var vendorPickUpOrderModel = await _context.PickUpOrders
+                                    .Include(x => x.Client)
+                                    .Include(x => x.Vendor)
+                                    .Include(x => x.Cake)
+                                    .Where(x => x.VendorId == vendorId)
+                                    .Select(x => new VendorPickUpOrderModel
+                                    {
+                                        ClientFirstName = x.Client.FirstName,
+                                        ClientLastName = x.Client.LastName,
+                                        CakeName = x.Cake.Name,
+                                        CakeDescription = x.Cake.Description,
+                                        Price = x.Cake.Price,
+                                        StartDay = x.StartDay,
+                                        EndDay = x.EndDay
+
+                                    })
+                                    .OrderBy(x => x.StartDay)
+                                    .ToListAsync();
+
+            return vendorPickUpOrderModel;
         }
 
-        public Task<PickUpOrderModel> Update(PickUpOrderModel pickUpOrderModel)
+        public async Task Update(int id, PickUpOrderModel pickUpOrderModel)
         {
-            throw new NotImplementedException();
+            PickUpOrder pickUpOrder = await _context.PickUpOrders.FindAsync(id);
+            pickUpOrder.ClientId = pickUpOrderModel.ClientId;
+            pickUpOrder.VendorId = pickUpOrderModel.VendorId;
+            pickUpOrder.CakeId = pickUpOrderModel.CakeId;
+            pickUpOrder.StartDay = pickUpOrderModel.StartDay;
+            pickUpOrder.EndDay = pickUpOrderModel.EndDay;
+
+            _context.PickUpOrders.Update(pickUpOrder);
+            await _context.SaveChangesAsync();
         }
+
+        public async Task<List<PickUpOrderModel>> GetAll()
+        {
+            var pickUpOrders = await (await GetAllQuery()).ToListAsync();
+            var list = new List<PickUpOrderModel>();
+            foreach (var pickUpOrder in pickUpOrders)
+            {
+                var pickUpOrderModel = new PickUpOrderModel
+                {
+                    ClientId = pickUpOrder.ClientId,
+                    VendorId = pickUpOrder.VendorId,
+                    CakeId = pickUpOrder.CakeId,
+                    StartDay = pickUpOrder.StartDay,
+                    EndDay = pickUpOrder.EndDay
+                };
+                list.Add(pickUpOrderModel);
+            }
+            return list;
+        }
+
+        public async Task<IQueryable<PickUpOrder>> GetAllQuery()
+        {
+            var query = _context.PickUpOrders.AsQueryable();
+            return query;
+        }
+
     }
 }

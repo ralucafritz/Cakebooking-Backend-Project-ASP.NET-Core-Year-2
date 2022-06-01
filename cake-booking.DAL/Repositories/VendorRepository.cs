@@ -1,5 +1,7 @@
-﻿using cake_booking.DAL.Interfaces;
+﻿using cake_booking.DAL.Entities;
+using cake_booking.DAL.Interfaces;
 using cake_booking.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,35 +18,67 @@ namespace cake_booking.DAL.Repositories
         {
             _context = context;
         }
-
-        public Task Create(VendorModel vendor)
+        // C R U D
+        public async Task Create(VendorModel vendorModel)
         {
-            throw new NotImplementedException();
+            var vendor = new Vendor
+            {
+                Name = vendorModel.Name
+            };
+
+            await _context.Vendors.AddAsync(vendor);
+            await _context.SaveChangesAsync();
+            
+        }
+        public async Task<List<VendorModel>> GetAll()
+        {
+            var vendors = await(await GetAllQuery()).ToListAsync();
+            var list = new List<VendorModel>();
+            foreach (var vendor in vendors)
+            {
+                VendorModel vendorModel = new VendorModel
+                {
+                    Name = vendor.Name
+                };
+                list.Add(vendorModel);
+            }
+
+            return list;
         }
 
-        public Task Delete(int id, VendorModel vendor)
+        public async Task<IQueryable<Vendor>> GetAllQuery()
         {
-            throw new NotImplementedException();
+            var query = _context.Vendors.AsQueryable();
+            return query;
         }
 
-        public Task<List<VendorModel>> GetAll()
+        public async Task<VendorModel> GetById(int id)
         {
-            throw new NotImplementedException();
+            Vendor vendor = await _context.Vendors.FindAsync(id);
+            VendorModel vendorModel = new VendorModel
+            {
+                Name = vendor.Name
+            };
+            return vendorModel;
         }
 
-        public Task<IQueryable<VendorModel>> GetAllQuery()
+        public async Task Update(int id, VendorModel vendorModel)
         {
-            throw new NotImplementedException();
-        }
+            var vendor = await _context.Vendors.FindAsync(id);
+            
+            vendor.Name = vendorModel.Name;
+            
+            _context.Vendors.Update(vendor);
 
-        public Task<VendorModel> GetById(int id)
-        {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();
         }
-
-        public Task Update(int id, VendorModel vendor)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            Vendor vendor = await _context.Vendors.FindAsync(id);
+
+            _context.Vendors.Remove(vendor);
+
+            await _context.SaveChangesAsync();
         }
     }
 }
