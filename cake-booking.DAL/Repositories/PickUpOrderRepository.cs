@@ -10,6 +10,13 @@ namespace cake_booking.DAL.Repositories
 {
     public class PickUpOrderRepository : IPickUpOrderRepository
     {
+        private readonly AppDbContext _context;
+
+        public PickUpOrderRepository(AppDbContext context)
+        {
+            _context = context;
+        }
+
         public Task<PickUpOrderModel> Create(PickUpOrderModel pickUpOrderModel)
         {
             throw new NotImplementedException();

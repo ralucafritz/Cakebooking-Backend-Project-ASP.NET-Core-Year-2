@@ -1,3 +1,4 @@
+using cake_booking.BLL.Interfaces;
 using cake_booking.DAL;
 using cake_booking.DAL.Interfaces;
 using cake_booking.DAL.Repositories;
@@ -48,6 +49,15 @@ namespace cake_booking
             services.AddTransient<IPickUpOrderRepository, PickUpOrderRepository>();
             services.AddTransient<ICakeRepository, CakeRepository>();
             services.AddTransient<IScheduleRepository, ScheduleRepository>();
+
+
+            // MANAGERS
+            services.AddTransient<IClientManager, ClientManager>();
+            //services.AddTransient<IClientAddressManager, ClientAddressManager>();
+            //services.AddTransient<IVendorManager, VendorManager>();
+            //services.AddTransient<ICakeManager, CakeManager>();
+            //services.AddTransient<IPickUpOrderManager, PickUpOrderManager>();
+            //services.AddTransient<IScheduleManager, ScheduleManager>();
 
 
 

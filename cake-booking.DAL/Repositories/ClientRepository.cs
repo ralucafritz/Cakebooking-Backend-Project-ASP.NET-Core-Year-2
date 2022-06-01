@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace cake_booking.DAL.Repositories
 {
-    public class ClientRepository : IClientRepository
+    public class ClientManager : IClientRepository
     {
         private readonly AppDbContext _context;
 
-        public ClientRepository(AppDbContext context)
+        public ClientManager(AppDbContext context)
         {
             _context = context;
         }

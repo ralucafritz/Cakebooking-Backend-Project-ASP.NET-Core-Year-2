@@ -10,6 +10,13 @@ namespace cake_booking.DAL.Repositories
 {
     public class CakeRepository : ICakeRepository
     {
+        private readonly AppDbContext _context;
+
+        public CakeRepository(AppDbContext context)
+        {
+            _context = context;
+        }
+
         public Task Create(CakeModel cake)
         {
             throw new NotImplementedException();

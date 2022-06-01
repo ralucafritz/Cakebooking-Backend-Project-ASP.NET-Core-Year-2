@@ -10,6 +10,13 @@ namespace cake_booking.DAL.Repositories
 {
     public class ScheduleRepository : IScheduleRepository
     {
+        private readonly AppDbContext _context;
+
+        public ScheduleRepository(AppDbContext context)
+        {
+            _context = context;
+        }
+
         public Task Create(ScheduleModel schedule)
         {
             throw new NotImplementedException();

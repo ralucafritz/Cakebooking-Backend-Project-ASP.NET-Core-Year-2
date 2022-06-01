@@ -10,6 +10,13 @@ namespace cake_booking.DAL.Repositories
 {
     public class VendorRepository : IVendorRepository
     {
+        private readonly AppDbContext _context;
+
+        public VendorRepository(AppDbContext context)
+        {
+            _context = context;
+        }
+
         public Task Create(VendorModel vendor)
         {
             throw new NotImplementedException();
