@@ -1,5 +1,7 @@
 ﻿using cake_booking.BLL.Interfaces;
+using cake_booking.DAL.Entities;
 using cake_booking.DAL.Interfaces;
+using cake_booking.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +18,55 @@ namespace cake_booking.BLL.Managers
         {
             _clientRepo = clientRepo;
         }
+
+        public async Task Create(ClientModel clientModel)
+        {
+            await _clientRepo.Create(clientModel);
+        }
+
+        public async Task Delete(int id)
+        {
+            await _clientRepo.Delete(id);
+        }
+
+        public async Task<List<ClientJoinClientAddressModel>> GetAddress()
+        {
+            return await _clientRepo.GetAddress();
+        }
+
+        public async Task<List<ClientModel>> GetAll()
+        {
+            return await _clientRepo.GetAll();
+        }
+
+        public async Task<IQueryable<Client>> GetAllQuery()
+        {
+            return await _clientRepo.GetAllQuery();
+        }
+
+        public async Task<ClientModel> GetById(int id)
+        {
+            return await _clientRepo.GetById(id);
+        }
+
         public async Task<List<string>> ModifyStudent()
         {
-            throw new NotImplementedException();
+            var clients = await _clientRepo.GetAll();
+            var list = new List<string>();
+            var i = 0;
+            foreach(var client in clients)
+            {
+                i++;
+                list.Add($"Client {i}: \n" +
+                    $"\t First Name: {client.FirstName} \n" +
+                    $"\t Last Name: {client.LastName} \n");
+            }
+            return list;
+        }
+
+        public async Task Update(int id, ClientModel clientModel)
+        {
+            await _clientRepo.Update(id, clientModel);
         }
     }
 }

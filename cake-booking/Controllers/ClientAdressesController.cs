@@ -1,5 +1,7 @@
-﻿using cake_booking.DAL;
+﻿using cake_booking.BLL.Interfaces;
+using cake_booking.DAL;
 using cake_booking.DAL.Entities;
+using cake_booking.DAL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,32 +15,31 @@ namespace cake_booking.Controllers
     [ApiController]
     public class ClientAdressesController : ControllerBase
     {
-        private readonly AppDbContext _context;
 
-        public ClientAdressesController(AppDbContext context)
+        //private readonly AppDbContext _context;
+
+        //public ClientAdressesController(AppDbContext context)
+        //{
+        //    _context = context;
+        //}
+
+        private readonly IClientAddressManager _clientAddressManager;
+
+        public ClientAdressesController(IClientAddressManager clientAddressManager)
         {
-            _context = context;
+            _clientAddressManager = clientAddressManager;
         }
 
-        [HttpPost("AddClientAddress")]
+        //[HttpPost("AddClientAddress")]
 
         //////////////////////////////////////////////// CREATE ////////////////////////////////////////////////////////
 
-        public async Task<IActionResult> AddClientAddress([FromBody] ClientAddress clientAddress)
-        {
-            if (string.IsNullOrEmpty(clientAddress.City))
-            {
-                return BadRequest("City is null");
-            }
-            if (string.IsNullOrEmpty(clientAddress.Country))
-            {
-                return BadRequest("Country is null");
-            }
+        //public async Task<IActionResult> AddClientAddress([FromBody] ClientAddress clientAddress)
+        //{
+        //    await _clientAddressManager.ClientAddresses.AddAsync(clientAddress);
+        //    await _clientAddressManager.SaveChangesAsync();
 
-            await _context.ClientAddresses.AddAsync(clientAddress);
-            await _context.SaveChangesAsync();
-
-            return Ok("ClientAddress added successfully.");
-        }
+        //    return Ok("ClientAddress added successfully.");
+        //}
     }
 }

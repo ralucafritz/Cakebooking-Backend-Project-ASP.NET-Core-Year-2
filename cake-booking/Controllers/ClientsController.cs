@@ -1,5 +1,8 @@
-﻿using cake_booking.DAL;
+﻿using cake_booking.BLL.Interfaces;
+using cake_booking.DAL;
 using cake_booking.DAL.Entities;
+using cake_booking.DAL.Interfaces;
+using cake_booking.DAL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,34 +17,47 @@ namespace cake_booking.Controllers
     [ApiController]
     public class ClientsController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        //private readonly AppDbContext _context;
 
-        public ClientsController(AppDbContext context)
+        //public ClientsController(AppDbContext context)
+        //{
+        //    _context = context;
+        //}
+
+        private readonly IClientManager _clientManager;
+
+        public ClientsController(IClientManager clientManager)
         {
-            _context = context;
+            _clientManager = clientManager;
         }
 
-///////////////////////////////////////////////// CREATE ////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////// CREATE ////////////////////////////////////////////////////////
 
         [HttpPost("AddClient")]
-    
-        public async Task<IActionResult> AddClient([FromBody] Client client)
+
+        public async Task<IActionResult> AddClient([FromBody] ClientModel clientModel)
         {
-            if(string.IsNullOrEmpty(client.FirstName))
+            if (string.IsNullOrEmpty(clientModel.FirstName))
             {
                 return BadRequest("First name is null.");
             }
-            else if(string.IsNullOrEmpty(client.LastName))
+            else if (string.IsNullOrEmpty(clientModel.LastName))
             {
                 return BadRequest("Last name is null.");
             }
-            else if(checkInvalidNumber(client.PhoneNumber)!=null)
+            else if (checkInvalidNumber(clientModel.PhoneNumber) != null)
             {
-                return BadRequest(checkInvalidNumber(client.PhoneNumber));
+                return BadRequest(checkInvalidNumber(clientModel.PhoneNumber));
+            }
+            else if (clientModel.Gender is not (char)'F' 
+                                        and not (char)'M')
+            {
+                return BadRequest("Invalid gender.");
             }
 
-            await _context.Clients.AddAsync(client);
-            await _context.SaveChangesAsync();
+            // passes validation
+
+            await _clientManager.Create(clientModel);
 
             return Ok("Client added successfully");
         }
@@ -63,16 +79,16 @@ namespace cake_booking.Controllers
 
         //////////////////////////////////////////////// GET ////////////////////////////////////////////////////////
 
-        [HttpGet("Get/{id}")]
-        public async Task<IActionResult> GetClient([FromRoute] int id)
-        {
-            var client = await _context.Clients
-                .Where(x => x.Id == id)
-                .Include(x => x.ClientAddress)
-                //.Include(x => x.ClientInformation)
-                .FirstOrDefaultAsync();
+        //[HttpGet("Get/{id}")]
+        //public async Task<IActionResult> GetClient([FromRoute] int id)
+        //{
+        //    var client = await _context.Clients
+        //        .Where(x => x.Id == id)
+        //        .Include(x => x.ClientAddress)
+        //        //.Include(x => x.ClientInformation)
+        //        .FirstOrDefaultAsync();
 
-            return Ok(client);
-        }
+        //    return Ok(client);
+        //}
     }
 }
