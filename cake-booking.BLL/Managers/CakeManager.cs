@@ -1,4 +1,5 @@
 ﻿using cake_booking.BLL.Interfaces;
+using cake_booking.DAL.Interfaces;
 using cake_booking.DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -10,36 +11,36 @@ namespace cake_booking.BLL.Managers
 {
     public class CakeManager : ICakeManager
     {
-        private readonly ICakeManager _cakeManager;
+        private readonly ICakeRepository _cakeRepo;
 
-        public CakeManager(ICakeManager cakeManager)
+        public CakeManager(ICakeRepository cakeRepo)
         {
-            _cakeManager = cakeManager;
+            _cakeRepo = cakeRepo;
         }
 
         public async Task Create(CakeModel cakeModel)
         {
-            await _cakeManager.Create(cakeModel);
+            await _cakeRepo.Create(cakeModel);
         }
 
         public async Task Delete(int id)
         {
-            await _cakeManager.Delete(id);
+            await _cakeRepo.Delete(id);
         }
 
         public async Task<List<CakeModel>> GetAll()
         {
-            return await _cakeManager.GetAll();
+            return await _cakeRepo.GetAll();
         }
 
         public async Task<CakeModel> GetById(int id)
         {
-            return await _cakeManager.GetById(id);
+            return await _cakeRepo.GetById(id);
         }
 
         public async Task Update(int id, CakeModel cakeModel)
         {
-            await _cakeManager.Update(id, cakeModel);
+            await _cakeRepo.Update(id, cakeModel);
         }
     }
 }
