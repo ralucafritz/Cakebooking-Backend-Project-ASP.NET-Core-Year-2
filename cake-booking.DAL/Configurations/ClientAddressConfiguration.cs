@@ -17,11 +17,13 @@ namespace cake_booking.DAL.Configurations
 
             builder.Property(x => x.City)
                 .HasColumnType("nvarchar(100)")
-                .HasMaxLength(100);
+                .HasMaxLength(100)
+                .IsRequired(true);
 
             builder.Property(x => x.Country)
                 .HasColumnType("nvarchar(100)")
-                .HasMaxLength(100);
+                .HasMaxLength(100)
+                .IsRequired(true);
 
             builder.HasOne(x => x.Client)
                 .WithOne(x => x.ClientAddress)

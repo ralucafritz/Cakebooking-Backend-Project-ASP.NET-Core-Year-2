@@ -17,14 +17,17 @@ namespace cake_booking.DAL.Configurations
 
             builder.Property(p => p.Name)
                 .HasColumnType("nvarchar(200)")
-                .HasMaxLength(200);
-            
+                .HasMaxLength(200)
+                .IsRequired(true);
+
             builder.Property(p => p.Description)
                 .HasColumnType("nvarchar(200)")
-                .HasMaxLength(200);
+                .HasMaxLength(200)
+                .IsRequired(true);
 
             builder.Property(p => p.Price)
-                .HasColumnType("decimal(4,2)");
+                .HasColumnType("decimal(4,2)")
+                .IsRequired(true);
         }
     }
 }

@@ -39,11 +39,6 @@ namespace cake_booking.BLL.Managers
             return await _clientRepo.GetAll();
         }
 
-        public async Task<IQueryable<Client>> GetAllQuery()
-        {
-            return await _clientRepo.GetAllQuery();
-        }
-
         public async Task<ClientModel> GetById(int id)
         {
             return await _clientRepo.GetById(id);

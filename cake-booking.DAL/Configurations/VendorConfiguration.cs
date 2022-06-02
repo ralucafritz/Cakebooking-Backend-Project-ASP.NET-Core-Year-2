@@ -18,7 +18,8 @@ namespace cake_booking.DAL.Configurations
 
             builder.Property(p => p.Name)
                 .HasColumnType("nvarchar(200)")
-                .HasMaxLength(200);
+                .HasMaxLength(200)
+                .IsRequired(true);
         }
     }
 }

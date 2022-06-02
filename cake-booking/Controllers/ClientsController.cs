@@ -62,7 +62,7 @@ namespace cake_booking.Controllers
             return Ok("Client added successfully");
         }
 
-        // check valid phonenumber
+        // check valid phone number method
         private string checkInvalidNumber(string phoneNumber)
         {
             string checkError = null;
@@ -79,16 +79,15 @@ namespace cake_booking.Controllers
 
         //////////////////////////////////////////////// GET ////////////////////////////////////////////////////////
 
-        //[HttpGet("Get/{id}")]
-        //public async Task<IActionResult> GetClient([FromRoute] int id)
-        //{
-        //    var client = await _context.Clients
-        //        .Where(x => x.Id == id)
-        //        .Include(x => x.ClientAddress)
-        //        //.Include(x => x.ClientInformation)
-        //        .FirstOrDefaultAsync();
+        [HttpGet("Get/{id}")]
+        public async Task<IActionResult> GetClientById([FromRoute] int id)
+        {
+            var client = await _clientManager.GetById(id);
 
-        //    return Ok(client);
-        //}
+            return Ok(client);
+        }
+
+        //[HttpGet("Update")]
+        
     }
 }
