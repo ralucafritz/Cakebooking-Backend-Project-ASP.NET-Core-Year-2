@@ -42,11 +42,6 @@ namespace cake_booking.BLL.Managers
             return await _pickUpOrderRepo.GetFutureOrders();
         }
 
-        public async Task<PickUpOrderModel> GetOrderInfo(int vendorId, int clientId, int cakeId, DateTime startDay)
-        {
-            return await _pickUpOrderRepo.GetOrderInfo(vendorId, clientId, cakeId, startDay);
-        }
-
         public async Task<List<PickUpOrderModel>> GetOrdersHistory()
         {
             return await _pickUpOrderRepo.GetOrdersHistory();

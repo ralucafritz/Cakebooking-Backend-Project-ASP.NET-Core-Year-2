@@ -2,7 +2,7 @@
 
 namespace cake_booking.DAL.Migrations
 {
-    public partial class CheckingUpdates : Migration
+    public partial class ReinitDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

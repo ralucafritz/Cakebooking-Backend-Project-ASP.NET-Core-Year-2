@@ -10,7 +10,7 @@ namespace cake_booking.DAL.Entities
     {
         public int Id { get; set; }
         public TimeSpan StartHour { get; set; }
-        public TimeSpan StopHour { get; set; }
+        public TimeSpan EndHour { get; set; }
         public int VendorId { get; set; }
         public virtual Vendor Vendor { get; set; }
     }

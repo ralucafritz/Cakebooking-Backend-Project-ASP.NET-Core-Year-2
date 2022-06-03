@@ -66,3 +66,9 @@ E:\repos\ASP.NET-Project\cake-booking\obj\Debug\net5.0\cake-booking.pdb
 E:\repos\ASP.NET-Project\cake-booking\obj\Debug\net5.0\cake-booking.genruntimeconfig.cache
 E:\repos\ASP.NET-Project\cake-booking\bin\Debug\net5.0\Humanizer.dll
 E:\repos\ASP.NET-Project\cake-booking\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+E:\repos\ASP.NET-Project\cake-booking\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\repos\ASP.NET-Project\cake-booking\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+E:\repos\ASP.NET-Project\cake-booking\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+E:\repos\ASP.NET-Project\cake-booking\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+E:\repos\ASP.NET-Project\cake-booking\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+E:\repos\ASP.NET-Project\cake-booking\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll

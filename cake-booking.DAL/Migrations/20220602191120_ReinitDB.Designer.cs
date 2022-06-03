@@ -10,8 +10,8 @@ using cake_booking.DAL;
 namespace cake_booking.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220602005346_CheckingUpdates")]
-    partial class CheckingUpdates
+    [Migration("20220602191120_ReinitDB")]
+    partial class ReinitDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

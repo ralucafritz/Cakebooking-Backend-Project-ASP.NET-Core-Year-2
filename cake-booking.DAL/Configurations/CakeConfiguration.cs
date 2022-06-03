@@ -21,8 +21,8 @@ namespace cake_booking.DAL.Configurations
                 .IsRequired(true);
 
             builder.Property(p => p.Description)
-                .HasColumnType("nvarchar(200)")
-                .HasMaxLength(200)
+                .HasColumnType("nvarchar(500)")
+                .HasMaxLength(500)
                 .IsRequired(true);
 
             builder.Property(p => p.Price)

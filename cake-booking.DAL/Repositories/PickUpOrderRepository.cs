@@ -86,10 +86,6 @@ namespace cake_booking.DAL.Repositories
             return pickUpOrderModel;
         }
 
-        public Task<PickUpOrderModel> GetOrderInfo(int vendorId, int clientId, int cakeId, DateTime orderTime)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<List<PickUpOrderModel>> GetOrdersHistory()
         {

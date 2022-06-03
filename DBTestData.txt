@@ -1,0 +1,137 @@
+DATABASE DATA
+
+Auth:
+{
+  "email": "test@email.com",
+  "password": "Parola123!",
+  "role": "Admin"
+}
+{
+  "email": "usertest@email.com",
+  "password": "Parola123!",
+  "role": "User"
+}
+
+10 CLIENTS:
+
+{
+  "firstName": "Andrei",
+  "lastName": "Marin",
+  "phoneNumber": "0762452635",
+  "gender": "M"
+}
+{
+  "firstName": "Andreea",
+  "lastName": "Popescu",
+  "phoneNumber": "0762122635",
+  "gender": "F"
+}
+{
+  "firstName": "Luna",
+  "lastName": "Goodwin",
+  "phoneNumber": "0724452635",
+  "gender": "F"
+}
+{
+  "firstName": "Amar",
+  "lastName": "Dudescu",
+  "phoneNumber": "0762526352",
+  "gender": "M"
+}
+{
+  "firstName": "Amalia",
+  "lastName": "Muresan",
+  "phoneNumber": "0762152635",
+  "gender": "F"
+}
+{
+  "firstName": "Luca",
+  "lastName": "Calinescu",
+  "phoneNumber": "0762422635",
+  "gender": "M"
+}
+{
+  "firstName": "Raluca",
+  "lastName": "Urdea",
+  "phoneNumber": "0762425635",
+  "gender": "F"
+}
+{
+  "firstName": "Mihaela",
+  "lastName": "Fritz",
+  "phoneNumber": "0722452635",
+  "gender": "F"
+}
+{
+  "firstName": "Gabriel",
+  "lastName": "Gogoasa",
+  "phoneNumber": "0712452635",
+  "gender": "M"
+}
+{
+  "firstName": "Antonia",
+  "lastName": "Constantin",
+  "phoneNumber": "0711425635",
+  "gender": "F"
+}
+
+// CLIENTSADDRESSES
+id in URL
+{
+  "city": "Bucharest",
+  "country": "Romania"
+}
+{
+  "city": "Cluj-Napoca",
+  "country": "Romania"
+}
+{
+  "city": "Constanta",
+  "country": "Romania"
+}
+{
+  "city": "Brasov",
+  "country": "Romania"
+}
+{
+  "city": "Iasi",
+  "country": "Romania"
+}
+
+// CAKE 
+
+// cake names and description from
+// https://www.cofetariaarmand.ro/
+
+{
+  "name": "Tort Black Velvet",
+  "description": "Acest model are blaturi negre, crema din ciocolata si mocca, insiropat cu rom, umplut cu crema de branza, frisca naturala, ciocolata neagra si decorat cu bomboane Ferrero, Raffaelo si alune de padure.",
+  "price": 40
+}
+{
+  "name": "Tort Orange Poppy Seed",
+  "description": "Un tort in care am combinat crema fina de portocale cu bucatele dulci- acrisoare de portocala zemoasa si blatul cu lamaie, seminte de mac si insiropat cu gin.",
+  "price": 38
+}
+{
+  "name": "Tort Macaron Kahlua",
+  "description": "Blatul realizat din faina de migdale, zahar pudra si albus de oua, iar magia se afla in crema in care strecuram rafinatul lichior de cafea Kahlua, trufele cu ciocolata, ornat cu jeleu din lichior, macarons si trufe.",
+  "price": 30
+}
+{
+  "name": "Tort Fleurs de Sel",
+  "description": "Tortul Fleurs de Sel este desertul perfect pentru iubitorii de caramel si ciocolata cu lapte. Intre cele doua straturi de mousse de ciocolata beligiana cu lapte, cofetarii nostri au asezat o insertie delicioasa de caramel sarat. ",
+  "price": 25
+}
+{
+  "name": "Tort Hazelnut Macaron",
+  "description": "Pe un blat realizat din alune de padure, pasta de vanilie, lichior Frangelico, faina si oua, se aseaza straturile fine de frosting de ciocolata cu alune, peste care adaugam ca decor macaronul cu glazura de alune, bomboanele de ciocolata si alunele caramelizate cu foita de aur.",
+  "price": 32
+}
+
+// VENDOR
+
+
+// SCHEDULE
+
+// PICKUPORDER
