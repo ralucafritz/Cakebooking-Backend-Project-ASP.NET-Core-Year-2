@@ -18,6 +18,8 @@ namespace cake_booking.DAL.Interfaces
         Task<ClientModel> GetById(int id);
         Task Delete(int id);
         Task Update(int id, ClientModel client);
+        Task<List<string>> GetClientAndCity();
+        Task<List<string>> GroupClientsByGender();
 
     }
 }

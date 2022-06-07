@@ -135,6 +135,7 @@ namespace cake_booking.DAL.Repositories
         public async Task Update(int id, PickUpOrderModel pickUpOrderModel)
         {
             PickUpOrder pickUpOrder = await _context.PickUpOrders.FindAsync(id);
+
             pickUpOrder.ClientId = pickUpOrderModel.ClientId;
             pickUpOrder.VendorId = pickUpOrderModel.VendorId;
             pickUpOrder.CakeId = pickUpOrderModel.CakeId;

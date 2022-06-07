@@ -35,7 +35,7 @@ namespace cake_booking.Controllers
 
             await _cakeManager.Create(cakeModel);
 
-            return Ok("Cake added successfully.");
+            return Ok($"Cake {cakeModel.Name} added successfully.");
 
         }
 

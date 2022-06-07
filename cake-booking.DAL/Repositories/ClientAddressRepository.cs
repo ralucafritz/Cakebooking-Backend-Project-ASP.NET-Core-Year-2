@@ -41,7 +41,7 @@ namespace cake_booking.DAL.Repositories
             ClientAddress clientAddresses = await _context.ClientAddresses.FindAsync(id);
             ClientAddressModel clientAddressModel = new ClientAddressModel
             {
-                City = clientAddresses.City,
+                City = clientAddresses.City, 
                 Country = clientAddresses.Country,
             };
             return clientAddressModel;

@@ -83,6 +83,18 @@ namespace cake_booking.DAL.Repositories
         {
             Cake cake = await _context.Cakes.FindAsync(id);
 
+            // CASCADE DELETE
+
+            try
+            {
+                var orders = _context.PickUpOrders.OrderBy(x => x.CakeId).First();
+                _context.PickUpOrders.Remove(orders);
+            }
+            catch (Exception e)
+            {
+                // skip;
+            }  
+
             _context.Cakes.Remove(cake);
 
             await _context.SaveChangesAsync();

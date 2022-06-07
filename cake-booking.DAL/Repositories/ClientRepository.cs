@@ -115,9 +115,64 @@ namespace cake_booking.DAL.Repositories
         {
             Client client = await _context.Clients.FindAsync(id);
 
+                 // CASCADE DELETE
+            var addresses = _context.ClientAddresses.OrderBy(x => x.ClientId).Include(x => x.Client).First();
+            try
+            {
+                var orders = _context.PickUpOrders.OrderBy(x => x.ClientId).First();
+                _context.PickUpOrders.Remove(orders);
+            }catch (Exception e)
+            {
+                // skip;
+            }
+
+            _context.ClientAddresses.Remove(addresses);
+
             _context.Clients.Remove(client);
 
             await _context.SaveChangesAsync();
+        }
+
+        // join linq
+
+        public async Task<List<string>> GetClientAndCity()
+        {
+            var clients = _context.Clients;
+            var clientsAddressesJoin = await _context
+                .ClientAddresses
+                .Join(clients, b => b.ClientId, a => a.Id, (b, a) => new
+                {
+                    a.FirstName,
+                    b.City
+                }).ToListAsync();
+
+            var list = new List<string>();
+            foreach (var group in clientsAddressesJoin)
+            {
+                list.Add($"{group.FirstName}: {group.City}");
+            }
+
+
+            return list;
+        }
+        // groupby 
+        public async Task<List<string>> GroupClientsByGender()
+        {
+            var clients = await this.GetAll();
+            var clientsGrouped = clients.GroupBy(x => x.Gender);
+            var list = new List<string>();
+            foreach (var group in clientsGrouped)
+            {
+                list.Add($"{group.Key}: {group.Count()}");
+
+                foreach(var client in group)
+                {
+                    list.Add($"\t Name: {client.LastName} {client.FirstName}");
+                }
+            }
+
+
+            return list;
         }
 
     }

@@ -14,7 +14,7 @@ namespace cake_booking.DAL.Helpers
         {
             return vendors.Include(x => x.Schedules);
         }
-
+        
         public static IQueryable Where(this IQueryable<Vendor> vendors, string name)
         {
             return vendors

@@ -76,6 +76,9 @@ Auth:
 }
 
 // CLIENTSADDRESSES
+REQUESTS AT:
+
+
 id in URL
 {
   "city": "Bucharest",
@@ -131,7 +134,81 @@ id in URL
 
 // VENDOR
 
+{
+  "name": "TorturiOnline"
+}
+{
+  "name": "CofetarieOnline"
+}
+{
+  "name": "CakesToGo"
+}
+{
+  "name": "Cafele Si Toturi"
+}
+{
+  "name": "Sweetness in a shape"
+}
 
 // SCHEDULE
+vendorId in URL
+
+{
+  "startHour": "08:00",
+  "endHour": "13:30"
+}
+{
+  "startHour": "6:30",
+  "endHour": "11:00"
+}
+{
+  "startHour": "9",
+  "endHour": "12:30"
+}
+{
+  "startHour": "12",
+  "endHour": "18"
+}
+{
+  "startHour": "12",
+  "endHour": "00:00"
+}
+
 
 // PICKUPORDER
+
+{
+  "startDay": "2022-06-03T10:11:26.854Z",
+  "clientId": 1,
+  "vendorId": 1,
+  "cakeId": 1,
+  "endDay": "2022-06-04T10:11:26.854Z"
+}
+{
+  "startDay": "2022-06-03T10:11:26.854Z",
+  "clientId":3,
+  "vendorId": 3,
+  "cakeId": 3,
+  "endDay": "2022-06-04T14:28:26.854Z"
+}
+{
+  "startDay": "2022-06-01T10:11:26.854Z",
+  "clientId": 0,
+  "vendorId": 0,
+  "cakeId": 0,
+  "endDay": "2022-06-02T10:11:26.854Z"
+}
+{
+  "startDay": "2022-06-03T10:11:26.854Z",
+  "clientId": 0,
+  "vendorId": 0,
+  "cakeId": 0,
+  "endDay": "2022-06-06T10:11:26.854Z"
+}
+{
+  "startDay": "2022-06-03T10:11:26.854Z",
+  "clientId": 0,
+  "vendorId": 0,
+  "cakeId": 0,
+  "endDay": "2022-06-03T10:11:26.854Z"
+}

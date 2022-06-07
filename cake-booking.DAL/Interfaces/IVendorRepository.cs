@@ -13,9 +13,11 @@ namespace cake_booking.DAL.Interfaces
         Task<List<VendorModel>> GetAll();
         Task<VendorModel> GetById(int id);
         Task<IQueryable<Vendor>> GetAllQuery();
+        Task<List<VendorModel>> GetWithSchedules();
         Task Create(VendorModel vendorModel);
         Task Update(int id, VendorModel vendorModel);
         Task Delete(int id);
+        Task<List<string>> GetVendorsWithMoreSchedules();
 
     }
 }

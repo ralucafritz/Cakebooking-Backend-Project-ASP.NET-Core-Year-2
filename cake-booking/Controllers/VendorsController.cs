@@ -32,7 +32,7 @@ namespace cake_booking.Controllers
 
             await _vendorManager.Create(vendorModel);
 
-            return Ok("Vendor added successfully.");
+            return Ok($"Vendor {vendorModel.Name} added successfully.");
         }
 
         //////////////////////////////////////////////// GET ////////////////////////////////////////////////////////
@@ -53,6 +53,15 @@ namespace cake_booking.Controllers
 
             return Ok(vendorModels);
         }
+
+
+        //[HttpGet("get-vendors-with-schedules")]
+        //public async Task<IActionResult> GetVendorsWithSchdule()
+        //{
+        //    var vendorModels = await _vendorManager.GetWithSchedules();
+
+        //    return Ok(vendorModels);
+        //}
 
         //////////////////////////////////////////////// UPLOAD  ////////////////////////////////////////////////////////
 

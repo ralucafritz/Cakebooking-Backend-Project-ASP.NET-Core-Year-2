@@ -22,7 +22,7 @@ namespace cake_booking.Controllers
 
         ///////////////////////////////////////////////// CREATE ////////////////////////////////////////////////////////
 
-        [HttpPost("/addOrder/Cake={cakeId}/Client={clientId}/Vendor={vendorId}/")]
+        [HttpPost("addOrder/")]
 
         public async Task<IActionResult> AddOrder([FromBody] PickUpOrderModel pickUpOrderModel)
         {
@@ -43,14 +43,14 @@ namespace cake_booking.Controllers
 
         //////////////////////////////////////////////// GET ////////////////////////////////////////////////////////
 
-        [HttpGet("get-orders-history")]
+        //[HttpGet("get-orders-history")]
 
-        public async Task<IActionResult> GetOrdersHistory()
-        {
-            var pickUpOrderModels = await _pickUpOrderManager.GetOrdersHistory();
+        //public async Task<IActionResult> GetOrdersHistory()
+        //{
+        //    var pickUpOrderModels = await _pickUpOrderManager.GetOrdersHistory();
 
-            return Ok(pickUpOrderModels);
-        }
+        //    return Ok(pickUpOrderModels);
+        //}
 
         [HttpGet("get-orders")]
 
@@ -89,30 +89,34 @@ namespace cake_booking.Controllers
         }
 
         //////////////////////////////////////////////// UPLOAD  ////////////////////////////////////////////////////////
+        ///
+        // cannot update order, a client has to cancel/delete and make another order
+
+        //[HttpPut("update-order/{id}")]
+
+        //public async Task<IActionResult> UpdateOrder([FromRoute] int id, [FromBody] PickUpOrderModel pickUpOrderModel)
+        //{
+        //    if (isValid(pickUpOrderModel) != null)
+        //    {
+        //        return BadRequest(isValid(pickUpOrderModel));
+        //    }
+
+        //    await _pickUpOrderManager.Update(id, pickUpOrderModel);
+        //    return Ok($"PickUp Order #{id} has been updated");
+        //}
+
+        ////////////////////////////////////////////////// DELETE ////////////////////////////////////////////////////////
+
+        // orders get deleted only if one of the main elements of the key are deleted -> client / cake / vendor
 
 
-        [HttpPut("update-order/{id}")]
+        //[HttpDelete("delete")] // ?id=1
+        //public async Task<IActionResult> DeleteOrder([FromQuery] int id)
+        //{
+        //    await _pickUpOrderManager.Delete(id);
 
-        public async Task<IActionResult> UpdateOrder([FromRoute] int id, [FromBody] PickUpOrderModel pickUpOrderModel)
-        {
-            if (isValid(pickUpOrderModel) != null)
-            {
-                return BadRequest(isValid(pickUpOrderModel));
-            }
-
-            await _pickUpOrderManager.Update(id, pickUpOrderModel);
-            return Ok($"PickUp Order #{id} has been updated");
-        }
-
-        //////////////////////////////////////////////// DELETE ////////////////////////////////////////////////////////
-
-        [HttpDelete("delete")] // ?id=1
-        public async Task<IActionResult> DeleteOrder([FromQuery] int id)
-        {
-            await _pickUpOrderManager.Delete(id);
-
-            return Ok($"PickUpOrder #{id} has been deleted");
-        }
+        //    return Ok($"PickUpOrder #{id} has been deleted");
+        //}
 
         //////////////////////////////////////////////// EXTRA  ////////////////////////////////////////////////////////
 

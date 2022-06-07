@@ -1,4 +1,5 @@
 ﻿using cake_booking.DAL.Entities;
+using cake_booking.DAL.Helpers;
 using cake_booking.DAL.Interfaces;
 using cake_booking.DAL.Models;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,21 @@ namespace cake_booking.DAL.Repositories
 
             return list;
         }
+        // orderby and join 
+        public async Task<List<string>> GetVendorsWithMoreSchedules()
+        {
+            var vendors = await _context
+                .Vendors
+                .Include(x => x.Schedules)
+                .Where(x => x.Schedules.Count > 1)
+                .OrderByDescending(x => x.Name)
+                .Select(x => x.Name)
+                .ToListAsync();
+
+            return vendors;
+        }
+
+
 
         public async Task<IQueryable<Vendor>> GetAllQuery()
         {
@@ -62,6 +78,27 @@ namespace cake_booking.DAL.Repositories
             return vendorModel;
         }
 
+        public async Task<List<VendorModel>> GetWithSchedules()
+        {
+            var vendors = await (await GetAllQuery()).IncludeSchedule().ToListAsync();
+            var list = new List<VendorModel>();
+            foreach (var vendor in vendors)
+            {
+                VendorModel vendorModel = new VendorModel
+                {
+                    Name = vendor.Name
+
+                };
+                
+                list.Add(vendorModel);
+            }
+
+            //var returnList = 
+            
+            return list;
+        }
+
+
         public async Task Update(int id, VendorModel vendorModel)
         {
             var vendor = await _context.Vendors.FindAsync(id);
@@ -76,9 +113,28 @@ namespace cake_booking.DAL.Repositories
         {
             Vendor vendor = await _context.Vendors.FindAsync(id);
 
+            // CASCADE DELETE
+            var schedules = _context.Schedules.OrderBy(x => x.VendorId).Include(x => x.Vendor).First();
+            
+
+            try
+            {
+                var orders = _context.PickUpOrders.OrderBy(x => x.VendorId).First();
+                _context.PickUpOrders.Remove(orders);
+            }
+            catch (Exception e)
+            {
+                // skip;
+            }
+
+            _context.Schedules.Remove(schedules);
+           
+
             _context.Vendors.Remove(vendor);
 
             await _context.SaveChangesAsync();
         }
+
+
     }
 }

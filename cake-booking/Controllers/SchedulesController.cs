@@ -22,7 +22,7 @@ namespace cake_booking.Controllers
 
         ///////////////////////////////////////////////// CREATE ////////////////////////////////////////////////////////
 
-        [HttpPost("AddClientAddress/studentId={studentId}")]
+        [HttpPost("add/vendorId={vendorId}")]
 
         public async Task<IActionResult> AddSchedule([FromRoute] int vendorId, [FromBody] ScheduleModel scheduleModel)
         {
@@ -50,7 +50,7 @@ namespace cake_booking.Controllers
 
         // needs formating
 
-        [HttpGet("get-addresses")]
+        [HttpGet("get-schedules")]
         public async Task<IActionResult> GetSchedules()
         {
             var scheduleModels = await _scheduleManager.GetAll();

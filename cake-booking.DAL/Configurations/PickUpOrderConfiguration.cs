@@ -25,6 +25,7 @@ namespace cake_booking.DAL.Configurations
                 .WithMany(p => p.PickUpOrders)
                 .HasForeignKey(p => p.ClientId);
 
+
             builder.HasOne(p => p.Vendor)
                 .WithMany(p => p.PickUpOrders)
                 .HasForeignKey(p => p.VendorId);

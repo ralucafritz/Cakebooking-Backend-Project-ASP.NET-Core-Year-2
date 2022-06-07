@@ -14,5 +14,6 @@ namespace cake_booking.BLL.Interfaces
         Task Create(VendorModel vendorModel);
         Task Update(int id, VendorModel vendorModel);
         Task Delete(int id);
+        Task<List<VendorModel>> GetWithSchedules();
     }
 }

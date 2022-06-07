@@ -40,7 +40,7 @@ namespace cake_booking.Controllers
 
             await _clientManager.Create(clientModel);
 
-            return Ok("Client added successfully.");
+            return Ok($"Client {clientModel.FirstName} {clientModel.LastName} added successfully.");
         }
 
         //////////////////////////////////////////////// GET ////////////////////////////////////////////////////////
@@ -62,6 +62,19 @@ namespace cake_booking.Controllers
             return Ok(clientModels);
         }
 
+        [HttpGet("getClientAndCity")]
+        public async Task<List<string>> GetClientAndCity()
+        {
+            return await _clientManager.GetClientAndCity();
+        }
+
+        [HttpGet("getClientsByGender")]
+        public async Task<List<string>> GroupClientsByGender()
+        {
+            return await _clientManager.GroupClientsByGender();
+        }
+
+
         //////////////////////////////////////////////// UPLOAD  ////////////////////////////////////////////////////////
 
         [HttpPut("update-client/{id}")] 
@@ -82,12 +95,14 @@ namespace cake_booking.Controllers
         [HttpDelete("delete")] // ?id=1
         public async Task<IActionResult> DeleteClient([FromQuery] int id)
         {
+
             await _clientManager.Delete(id);
 
             return Ok($"Client #{id} has been deleted");
         }
 
         //////////////////////////////////////////////// EXTRA  ////////////////////////////////////////////////////////
+
 
         // check valid clientmodel method
         private string isValid(ClientModel clientModel)

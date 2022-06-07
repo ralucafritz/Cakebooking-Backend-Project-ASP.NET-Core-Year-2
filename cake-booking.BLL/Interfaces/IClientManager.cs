@@ -16,5 +16,7 @@ namespace cake_booking.BLL.Interfaces
         Task<ClientModel> GetById(int id);
         Task Delete(int id);
         Task Update(int id, ClientModel client);
+        Task<List<string>> GetClientAndCity();
+        Task<List<string>> GroupClientsByGender();
     }
 }

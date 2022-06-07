@@ -49,7 +49,7 @@ namespace cake_booking.BLL.Managers
             var clients = await _clientRepo.GetAll();
             var list = new List<string>();
             var i = 0;
-            foreach(var client in clients)
+            foreach (var client in clients)
             {
                 i++;
                 list.Add($"Client {i}: \n" +
@@ -62,6 +62,15 @@ namespace cake_booking.BLL.Managers
         public async Task Update(int id, ClientModel clientModel)
         {
             await _clientRepo.Update(id, clientModel);
+        }
+
+        public async Task<List<string>> GetClientAndCity()
+        {
+            return await _clientRepo.GetClientAndCity();
+        }
+        public async Task<List<string>> GroupClientsByGender()
+        {
+            return await _clientRepo.GroupClientsByGender();
         }
     }
 }

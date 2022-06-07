@@ -33,6 +33,11 @@ namespace cake_booking.BLL.Managers
             return await _vendorRepo.GetAll();
         }
 
+        public async Task<List<VendorModel>> GetWithSchedules()
+        {
+            return await _vendorRepo.GetWithSchedules();
+        }
+
         public async Task<VendorModel> GetById(int id)
         {
             return await _vendorRepo.GetById(id);
@@ -42,5 +47,6 @@ namespace cake_booking.BLL.Managers
         {
             await _vendorRepo.Update(id, vendorModel);
         }
+
     }
 }
